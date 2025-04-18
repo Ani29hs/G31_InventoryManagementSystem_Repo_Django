@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block main_block %}
+
+<style>
+    
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+    body {
+        background: linear-gradient(to right, #e0eafc);
+        color: #222;
+       
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    h2, h3 {
+        text-align: center;
+        color: #0056ff;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+    }
+
+    /* Glassmorphism Card */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        padding: 30px;
+        transition: 0.3s ease-in-out;
+    }
+
+    .glass-card:hover {
+        box-shadow: 0 15px 35px rgba(0, 119, 255, 0.25);
+    }
+
+    /* Form Elements */
+    .form-label {
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .form-control, .form-select {
+        background: rgba(255, 255, 255, 0.6);
+        border: 2px solid #0077ff;
+        border-radius: 10px;
+        padding: 12px;
+        width: 100%;
+        transition: all 0.3s ease-in-out;
+        font-size: 14px;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #0056ff;
+        box-shadow: 0 0 10px rgba(0, 119, 255, 0.7);
+        outline: none;
+    }
+
+    /* Button */
+    .btn-primary {
+        background: linear-gradient(135deg, #0077ff, #00ccff);
+        border: none;
+        padding: 14px 24px;
+        font-size: 16px;
+        font-weight: bold;
+        width: 100%;
+        text-transform: uppercase;
+        color: white;
+        border-radius: 10px;
+        transition: 0.3s ease;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 0 20px rgba(0, 119, 255, 0.6);
+    }
+
+    /* Table */
+    .table-container {
+        overflow-x: auto;
+        margin-top: 40px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 0 15px rgba(0, 119, 255, 0.1);
+    }
+
+    .table th {
+        background: linear-gradient(135deg, #0077ff, #00ccff);
+        color: white;
+        padding: 16px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+
+    .table td {
+        padding: 14px;
+        text-align: center;
+        font-size: 14px;
+        color: #333;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: rgba(0, 119, 255, 0.05);
+    }
+
+    .table tbody tr:hover {
+        background-color: rgba(0, 119, 255, 0.08);
+        transition: background-color 0.3s ease;
+    }
+
+    /* Alerts */
+    .alert {
+        border-radius: 10px;
+        font-size: 14px;
+        padding: 12px 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .container {
+            padding: 15px;
+        }
+
+        h2, h3 {
+            font-size: 18px;
+        }
+
+        .table th, .table td {
+            font-size: 13px;
+            padding: 10px;
+        }
+    }
+
+    /* Link Button */
+    .btn-link {
+        font-size: 18px;
+        color: #007bff;
+        font-weight: bold;
+        background: none;
+        border: none;
+        text-decoration: none;
+        padding: 0;
+    }
+
+    .btn-link:hover {
+        text-decoration: underline;
+        color: #0056ff;
+    }
+</style>
+<a href="{% url 'main' %}">Back</a>
+
+<div class="container mt-4">
+    {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == "error" %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {% else %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {% endif %}
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+    {% endfor %}
+{% endif %}
+</div>
+
+
+<div class="container">
+    <div class="glass-card">
+        <h2 class="text-center">🚀 Product Transfer 🚀</h2>
+
+
+        <form method="POST" >
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="product_id" class="form-label">Select Product:</label>
+                <select name="product_id" id="product_id" class="form-select" onchange="setFromWarehouse()" required>
+                    <option value="">-- Select Product --</option>
+                    {% for product in products %}
+                    <option value="{{ product.product_id }}" 
+                    data-warehouse-id="{{ product.warehouse.id }}" 
+                    data-warehouse-name="{{ product.warehouse.address }}">
+                {{ product.name }} ({{ product.quantity }} in stock)
+            </option>
+            
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="from_warehouse" class="form-label">From Warehouse:</label>
+                <!-- Hidden input for ID (used in form submission) -->
+    <input type="hidden" name="from_warehouse" id="from_warehouse" required>
+
+    <!-- Visible field for display (readonly, not submitted) -->
+    <input type="text" id="from_warehouse_name" class="form-control" readonly>
+
+            
+            </div>
+
+            <div class="mb-3">
+                <label for="to_warehouse" class="form-label">To Warehouse:</label>
+                <select name="to_warehouse" id="to_warehouse" class="form-select" required>
+                    {% for w in warehouse %}
+                        <option value="{{ w.id }}">{{ w.address }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="quantity_to_transfer" class="form-label">Quantity:</label>
+                <input type="number" name="quantity_to_transfer" id="quantity_to_transfer" class="form-control" min="1" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-2">Transfer Product</button>
+        </form>
+    </div>
+<br><br>
+<h3>📦 Transfer History 📦</h3>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Transfer ID</th>
+                <th>Product Name</th>
+                <th>From Warehouse</th>
+                <th>To Warehouse</th>
+                <th>Quantity</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transfer in transfers %}
+            <tr>
+                <td>{{ transfer.Warehouse_id }}</td>
+                <td>{{ transfer.product_id.name }}</td>
+                <td>{{ transfer.from_warehouse }}</td>
+                <td>{{ transfer.to_warehouse }}</td>
+                <td>{{ transfer.quantity_to_transfer }}</td>
+                <td>{{ transfer.transfer_date|date:"Y-m-d H:i" }}</td>
+                <td>
+                    {% if transfer.status == 'Pending' %}
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    {% elif transfer.status == 'Approved' %}
+                        <span class="badge bg-success">Approved</span>
+                    {% elif transfer.status == 'Rejected' %}
+                        <span class="badge bg-danger">Rejected</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+
+<script>
+    function setFromWarehouse() {
+    const productSelect = document.getElementById('product_id');
+    const selectedOption = productSelect.options[productSelect.selectedIndex];
+    const fromWarehouseInput = document.getElementById('from_warehouse');
+    const fromWarehouseNameInput = document.getElementById('from_warehouse_name');
+
+    const warehouseId = selectedOption.getAttribute('data-warehouse-id');
+    const warehouseName = selectedOption.getAttribute('data-warehouse-name');
+
+    fromWarehouseInput.value = warehouseId || '';
+    fromWarehouseNameInput.value = warehouseName || '';
+}
+
+</script>
+
+{% endblock %}

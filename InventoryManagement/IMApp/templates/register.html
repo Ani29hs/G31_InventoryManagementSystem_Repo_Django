@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title_block %} SignUp Page {% endblock %}
+
+
+{% block main_block %}
+<style>
+    .btn-link {
+        font-size: 18px;
+        color: #007bff;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 90px;
+    }
+
+    .btn-link:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center" 
+     style="min-height: 100vh; padding-top: 50px;">
+
+    <div class="card shadow-lg p-5 signup-card">
+        <h2 class="text-center mb-4">Create an Account</h2>
+
+        
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "error" %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {% else %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {% endif %}
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        {% endfor %}
+    {% endif %}
+   
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-control input-field" name="name" required>
+                </div>
+
+              
+                <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-control input-field" name="email" required>
+                </div>
+
+               
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control input-field" name="password"   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                    title="Password must contain at least 8 characters, including an uppercase letter, a lowercase letter, a number, and a special character."
+                    required>
+                </div>
+
+                
+                <div class="mb-3">
+                    <label class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control input-field" name="confirm_password" required>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+              
+                <div class="mb-3">
+                    <label class="form-label">Mobile</label>
+                    <input type="integer" class="form-control input-field" name="mobile"
+                           pattern="^[0-9]{10}$"
+                           title="Please enter a valid 10-digit mobile number"
+                           maxlength="10"
+                           required>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" name="terms" required>
+                    <label class="form-check-label">I agree to the <a href="#">Terms & Conditions</a></label>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 signup-btn">Register</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block main_block %}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #f4f4f4, #e8e8e8);
+        color: #333;
+        
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+{% if messages %}
+{% for message in messages %}
+    {% if message.tags == "error" %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {% else %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    {% endif %}
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+{% endfor %}
+{% endif %}
+
+
+
+<div class="container mt-5 p-4 bg-light rounded shadow">
+    <h2 class="text-center text-primary mb-4">✅ Approve Transfer Requests</h2>
+
+    {% if transfers %}
+    <table class="table table-bordered table-hover text-center">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transfer in transfers %}
+            <tr>
+                <td>{{ transfer.Warehouse_id }}</td>
+                <td>{{ transfer.product_id.name }}</td>
+                <td>{{ transfer.quantity_to_transfer }}</td>
+                <td>{{ transfer.from_warehouse.address }}</td>
+                <td>{{ transfer.to_warehouse.address }}</td>
+                <td>{{ transfer.transfer_date|date:"Y-m-d H:i" }}</td>
+                <td>
+                    <form method="POST" class="d-inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="transfer_id" value="{{ transfer.Warehouse_id }}">
+                        <button name="action" value="approve" class="btn btn-success btn-sm">Approve</button>
+                        <button name="action" value="reject" class="btn btn-danger btn-sm">Reject</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p class="text-center text-muted">No pending transfers to approve.</p>
+    {% endif %}
+</div>
+{% endblock %}

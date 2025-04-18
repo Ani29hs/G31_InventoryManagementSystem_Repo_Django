@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title_block %} Update Product {% endblock %}
+
+{% block main_block %}
+<a href="{% url 'product' %}" class="btn btn-link text-decoration-none">Back</a>
+<div class="container">
+    <h2 class="text-center manage-heading">Update Product</h2>
+    <form  method="POST">
+        {% csrf_token %}
+       
+        <div class="form-group">
+            <label for="productid">Product Id:</label>
+            <input type="text" class="form-control" id="productid" name="productid" value="{{ product.product_id }}" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Product Name:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ product.name }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Product Price:</label>
+            <input type="number" class="form-control" id="price" name="price" value="{{ product.price }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Product Quantity:</label>
+            <input type="text" class="form-control" id="quantity" name="quantity" value="{{ product.quantity }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Select Category:</label>
+            <select name="category" id="category" class="form-control" required>
+                <option value="">Choose Category</option>
+                <option value="electronics" {% if product.category == "electronics" %} selected {% endif %}>Electronics</option>
+                <option value="stationary" {% if product.category == "stationary" %} selected {% endif %}>Stationary</option>
+                <option value="homeapplience" {% if product.category == "homeapplience" %} selected {% endif %}>Home Appliance</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="warehouse">Select Warehouse</label>
+            <select name="warehouse" id="warehouse" class="form-control" required>
+                <option value="">Choose Warehouse</option>
+                {% for w in warehouse %}
+                    <option value="{{ w.id }}" {% if product.warehouse.id == w.id %}selected{% endif %}>
+                        {{ w.address }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <br>
+        <input type="submit" value="Update Product" class="btn btn-primary btn-block" style="margin-top: 20px;">
+    </form>
+</div>
+
+<style>
+
+    
+    .container {
+        background: white;
+        padding: 40px;
+        margin-top: 50px;
+        border-radius: 12px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .manage-heading {
+        font-size: 32px;
+        font-weight: 600;
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 40px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 12px 15px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-link {
+        font-size: 18px;
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    .btn-link:hover {
+        text-decoration: underline;
+    }
+
+    .btn-primary {
+        border-radius: 25px;
+        padding: 12px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        transform: scale(1.05);
+    }
+
+    .btn-block {
+        display: block;
+        width: 100%;
+    }
+
+    .animation-container {
+        width: 300px;
+        height: 300px;
+        transition: transform 0.5s ease-in-out;
+        margin-top: 20px;
+        position: fixed;
+        right: 10px;
+        top: 100px;
+    }
+</style>
+
+<script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+<div class="animation-container">
+<dotlottie-player src="https://lottie.host/a0016655-6791-4eb6-a883-43aaf40a52d1/lkaSqNGhOH.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+</div>
+{% endblock %}

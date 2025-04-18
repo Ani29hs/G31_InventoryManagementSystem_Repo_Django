@@ -1,0 +1,779 @@
+{% extends 'base.html' %}
+{% load static %}  
+
+{% block main_block %}
+
+
+
+<body>
+  <div class="hero_area" data-aos="fade-in" >
+    <div class="hero_bg_box">
+      <div class="bg_img_box">
+        <img src="{% static 'images/hero-bg.png' %}" alt="" style="background-size: cover;" loading="lazy">
+      </div>
+    </div>  
+    <section class="slider_section " data-aos="fade-up">
+        <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="container ">
+                <div class="row">
+                  <div class="col-md-6 ">
+                    <div class="detail-box">
+                      <h1 style="color: white; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                       Engineered to <br>
+                       handle all your
+                      inventory needs  
+
+                    </h1>
+                    <p style="font-size: 20px;">
+                      Your complete inventory management software to track inventory, streamline sales, fulfill orders, and oversee warehouses from a single window.
+                    </p>
+                    <div class="btn-box">
+                      <a href="{% url 'explain' %}" class="btn1">
+                        Read More
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="img-box">
+                    <img src="{% static 'images/slider-img.png' %}" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+    </section>
+   
+  
+</div>
+<section class="service_section layout_padding"  data-aos="fade-up">
+    <div class="service_container"  data-aos="fade-up" >
+      <div class="container " style="padding-bottom: 40px;">
+        <div class="heading_container heading_center" data-aos="fade-up">
+          <h2>
+           <span>Spend less time managing your orders</span>
+          </h2>
+
+        </div>
+        <div class="row">
+          <div class="col-md-4 ">
+            <div class="box " data-aos="fade-up">
+              
+              <div class="detail-box" data-aos="fade-up">
+                <h5 style="font-size: 18px; color: red; text-align: left; ">
+                  Track Effectively
+                </h5>
+
+                <br>
+
+                <h5 style="font-size: 25px; text-align: left;" data-aos="fade-up"> 
+                  Complete visibility for your items
+                </h5>
+
+
+
+                <p style="font-size: 18px; text-align: left;" data-aos="fade-up">
+                  Track different items across locations as they move through your inventory based on serial numbers and batches.
+                </p>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 ">
+            <div class="box " data-aos="fade-up">
+              <div class="detail-box" data-aos="fade-up">
+                <h5 style="font-size: 18px; color: red; text-align: left; ">
+                  Scale efficiently
+                </h5>
+
+                <br>
+
+                <h5 style="font-size: 25px; text-align: left;" data-aos="fade-up" >
+                 Warehouse Management System
+                </h5>
+
+                <p style="font-size: 18px; text-align: left;" data-aos="fade-up">
+                  Manage your warehouse efficiently by optimizing space and resources, and tracking inventory in real.
+
+  
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 ">
+            <div class="box " data-aos="fade-up">
+              
+              <div class="detail-box" data-aos="fade-up">
+                <h5 style="font-size: 18px; color: red; text-align: left; ">
+                  Collaborate better
+                </h5>
+
+                <br>
+
+                <h5 style="font-size: 25px; text-align: left;" data-aos="fade-up">
+                  Dedicated Customer Support
+                </h5>
+
+                <p style="font-size: 18px; text-align: left;" data-aos="fade-up">
+                  Build stronger customer relationships with a dedicated space to view and manage all transactions, pay online.
+                </p>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </section>
+
+  <div class="container" >
+    <section class="features-section" style="margin-bottom: 40px;"  data-aos="fade-up">
+      <div class="features-container" >
+          <div class="features-header" data-aos="fade-up">
+              <h2>Inventory</h2>
+              <p>Tracking and controlling your inventory is a lot easier with the complete inventory software that puts an end to stock mismatches and out-of-stock situations.</p>
+              <a href="{% url 'register' %}" class="signup-button">SIGN UP - IT'S FREE</a>
+          </div>
+  
+          <div class="features-grid">
+              <div class="feature-card" data-aos="fade-up">
+                  <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#4171b8" stroke-width="2">
+                      <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 16a7 7 0 0 1-7-7 7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7z"/>
+                      <path d="M12 7v5l3 3"/>
+                  </svg>
+                  <h3>Manage</h3>
+                  <p>Sort items, create item groups and bundles, and centralize record keeping.</p>
+              </div>
+  
+              <div class="feature-card" data-aos="fade-up">
+                  <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#4171b8" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                  <h3>Track</h3>
+                  <p>Trace item movements and their expiry dates at any time.</p>
+              </div>
+  
+              <div class="feature-card" data-aos="fade-up">
+                  <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#4171b8" stroke-width="2">
+                      <line x1="4" y1="12" x2="20" y2="12"/>
+                      <circle cx="8" cy="12" r="2"/>
+                      <circle cx="16" cy="12" r="2"/>
+                  </svg>
+                  <h3>Control</h3>
+                  <p>Set reorder points for items and make stock adjustments as you need.</p>
+              </div>
+          </div>
+  
+          <div class="testimonial" data-aos="fade-up">
+              <div>
+                  <div class="testimonial-content">
+                      "We have been able to simplify our in-house inventory management with increased efficiency and flexibility with ZoJo Inventory."
+                  </div>
+                  <div class="testimonial-author">
+                      <div class="author-name">Priyal Bafna,</div>
+                      <div class="author-title">Senior Manager Finance, Rapido Bike, India</div>
+                  </div>
+              </div>
+              <div class="company-logo" data-aos="fade-up">
+                  <img src="https://www.zoho.com/inventory/holiday-season/images/rapidologo.svg" alt="Rapido Logo">
+              </div>
+          </div>
+      </div>
+  </section>
+  </div>
+  
+  <div class="container">
+  <section class="features-section" style="background-color:lavender;">
+    <div class="features-container">
+        <div class="features-header" data-aos="fade-up">
+            <h2>Order</h2>
+            <p>Power your online sales with the comprehensive software to manage inventory that lets you dedicate more time to growing your orders.</p>
+            <a href="{%url 'explain'%}#OM" class="signup-button">Learn More</a>
+        </div>
+  
+        <div class="features-grid">
+            <div class="feature-card" data-aos="fade-up">
+                <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#4171b8" stroke-width="2">
+                    <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 16a7 7 0 0 1-7-7 7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7z"/>
+                    <path d="M12 7v5l3 3"/>
+                </svg>
+                <h3>Manage</h3>
+                <p>Manage your sales and purchase orders, and receive online payments without hassles.</p>
+            </div>
+  
+            <div class="feature-card" data-aos="fade-up">
+                <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#4171b8" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <h3>Centralize</h3>
+                <p>Streamline your online sales across channels, and update stock levels centrally.</p>
+            </div>
+  
+            <div class="feature-card" data-aos="fade-up">
+                <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#4171b8" stroke-width="2">
+                    <line x1="4" y1="12" x2="20" y2="12"/>
+                    <circle cx="8" cy="12" r="2"/>
+                    <circle cx="16" cy="12" r="2"/>
+                </svg>
+                <h3>Fulfill</h3>
+                <p>Simplify fulfillment by converting sales orders into packages and shipments in one click.</p>
+            </div>
+        </div>
+  
+        <div class="testimonial" data-aos="fade-up">
+            <div>
+                <div class="testimonial-content">
+                  "ZoJo Inventory has been amazing for us in collecting all of our online and offline sales in one place."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-name">Adam Petyt,</div>
+                    <div class="author-title">Director,
+  
+                      Element Packaging Ltd., UK</div>
+                </div>
+            </div>
+            <div class="company-logo" data-aos="fade-up">
+                <img src="https://www.zoho.com/inventory/holiday-season/images/elementlogo.svg" alt="Element">
+            </div>
+        </div>
+    </div>
+  </section>
+  </div>
+  
+  
+  <div class="container">
+    <section class="features-section" style="background-color:honeydew; margin-top: 40px;">
+      <div class="features-container">
+          <div class="features-header" data-aos="fade-up">
+              <h2>Warehouse</h2>
+              <p>Eliminate the need for multiple spreadsheets with this end-to-end online inventory management software that lets you manage different locations with ease.</p>
+              <a href="{%url 'explain'%}#WM" class="signup-button">Learn More</a>
+          </div>
+    
+          <div class="features-grid">
+              <div class="feature-card" data-aos="fade-up">
+                  <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#4171b8" stroke-width="2">
+                      <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 16a7 7 0 0 1-7-7 7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7z"/>
+                      <path d="M12 7v5l3 3"/>
+                  </svg>
+                  <h3>Oversee</h3>
+                  <p>Handle stock across different locations and dispatch orders from your nearest warehouse.</p>
+              </div>
+    
+              <div class="feature-card" data-aos="fade-up">
+                  <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#4171b8" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                  <h3>Transfer</h3>
+                  <p>Control stock flow among your warehouses by initiating transfer orders.</p>
+              </div>
+    
+              <div class="feature-card" data-aos="fade-up">
+                  <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#4171b8" stroke-width="2">
+                      <line x1="4" y1="12" x2="20" y2="12"/>
+                      <circle cx="8" cy="12" r="2"/>
+                      <circle cx="16" cy="12" r="2"/>
+                  </svg>
+                  <h3>Pick</h3>
+                  <p>Fulfill large orders hassle free by generating picklists for warehouse workers.</p>
+              </div>
+          </div>
+    
+          <div class="testimonial" data-aos="fade-up">
+              <div>
+                  <div class="testimonial-content">
+                    "With ZoJo Inventory, managing stocks and returns across multiple warehouses has been easier than expected."
+                  </div>
+                  <div class="testimonial-author">
+                      <div class="author-name">Patrick Fletch,</div>
+                      <div class="author-title">Director of Business Development,
+  
+                        Alloygator Limited, USA & Canada
+                        
+                        </div>
+                  </div>
+              </div>
+              <div class="company-logo" data-aos="fade-up">
+                  <img src="https://www.zoho.com/inventory/holiday-season/images/alloygatorlogo.svg" alt="Alloy Gator">
+              </div>
+          </div>
+      </div>
+    </section>
+    </div>
+  
+    <section class="about_section layout_padding" style="margin-top: 40px;"  data-aos="fade-up" id="aboutus">
+        <div class="container">
+          <div class="heading_container heading_center">
+            <h2>
+              About <span>Us</span>
+            </h2>
+           
+          </div>
+          <div class="row">
+            <div class="col-md-6 ">
+              <div class="img-box">
+                <img src="{% static 'images/about-img.png' %}" alt="">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="detail-box">
+                <h3>
+                  Welcome to Inventory Management System!
+                </h3>
+                <br>
+                <h2>
+                  Who We Are?
+                </h2>
+                <p>
+                  We are a team of professionals passionate about helping businesses track, manage, and optimize inventory efficiently. Our platform is designed to reduce errors, save time, and improve profitability by providing an intuitive and robust inventory management system.
+                </p>
+                <h2>
+                  Our Mission
+                </h2>
+                <p>
+                  Our mission is to simplify inventory tracking with a powerful, user-friendly solution that helps businesses stay organized, reduce losses, and maximize efficiency.
+                </p>
+                
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+     
+      <section class="why_section layout_padding"  data-aos="fade-up" id="whyus">
+        <div class="container">
+          <div class="heading_container heading_center" data-aos="fade-up">
+            <h2>
+              Why Choose <span>Us?</span>
+            </h2>
+          </div>
+          <div class="why_container">
+            <div class="box">
+              <div class="img-box" data-aos="fade-up">
+                <img src="https://media.licdn.com/dms/image/v2/D5612AQH28Cm_GBnK7A/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1682663704423?e=2147483647&v=beta&t=lpxWjz-VRsRx69SObn-D_92X7ijB57MzLV6dWEmHUKY" alt="" style="width: 100%;">
+              </div>
+              <div class="detail-box" data-aos="fade-up">
+                <h5>
+                  Accuracy & Efficiency
+                </h5>
+                <p data-aos="fade-up">
+                  Eliminate manual errors and say goodbye to outdated spreadsheets. Our system ensures that every product is accurately recorded, updated in real time, and easily accessible. With automated stock tracking, you can reduce discrepancies and improve workflow efficiency.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="img-box" data-aos="fade-up">
+                <img src="https://www.vnmtsolutions.com/wp-content/uploads/2020/12/How-Netsuite-Strengthens-The-Link-Between-Inventory-Management-and-Supply-Chain-Management.png" alt="">
+              </div>
+              <div class="detail-box" data-aos="fade-up">
+                <h5>
+                  Seamless Supplier & Order Management 
+                </h5>
+                <p data-aos="fade-up">
+                  Our system helps you track suppliers, purchase orders, and deliveries efficiently. Reduce delays and ensure your stock levels are always optimized.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="img-box" data-aos="fade-up">
+                <img src="https://www.notifyvisitors.com/pb/wp-content/uploads/2020/10/What-is-Customer-Support.jpg" alt="">
+              </div>
+              <div class="detail-box" data-aos="fade-up">
+                <h5 >
+                  Exceptional Customer Support 
+                </h5>
+                <p data-aos="fade-up">
+                  We are committed to helping you succeed with dedicated support whenever you need it. Our team is always ready to assist you with any questions or concerns you may have.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="img-box" data-aos="fade-up">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/008/554/114/small_2x/group-of-diversity-people-rating-customer-experience-writing-review-putting-likes-leaving-feedback-happy-clients-giving-positive-feedback-to-product-and-service-quality-flat-illustration-vector.jpg" alt="">
+              </div>
+              <div class="detail-box" data-aos="fade-up">
+                <h5>
+                  Happy Customers
+                </h5>
+                <p data-aos="fade-up">
+                  In an inventory management system, happy customers often come from the seamless and efficient handling of their orders.
+                </p>
+              </div>
+            </div>
+          </div>
+         
+      </section>
+    
+      <section class="team_section layout_padding"  data-aos="fade-up" id="team">
+        <div class="container-fluid">
+          <div class="heading_container heading_center" data-aos="fade-up">
+            <h2 class="">
+              Our <span> Team</span>
+            </h2>
+          </div>
+    
+          <div class="team_container" data-aos="fade-up">
+            <div class="row">
+              <div class="col-lg-3 col-sm-6">
+                <div class="box ">
+                  <div class="img-box" data-aos="fade-up">
+                    <img src="{% static 'images/Aniket.jpeg' %}" class="img1" alt="">
+                  </div>
+                  <div class="detail-box" data-aos="fade-up">
+                    <h5>
+                      Aniket Sharma
+                    </h5>
+                    
+                    <div class="social-icons">
+                      <a href=""><i class="fab fa-instagram"></i></a>
+                      <a href=""><i class="fab fa-twitter"></i></a>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="col-lg-3 col-sm-6">
+                <div class="box " data-aos="fade-up">
+                  <div class="img-box" data-aos="fade-up">
+                    <img src=" {% static 'images/Aditya.jpeg' %}" class="img1" alt="">
+                  </div>
+                  <div class="detail-box" data-aos="fade-up">
+                    <h5>
+                      Aditya Chauhan
+                    </h5>
+                    
+                     <div class="social-icons">
+                      <a href=""><i class="fab fa-instagram"></i></a>
+                      <a href=""><i class="fab fa-twitter"></i></a>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="col-lg-3 col-sm-6">
+                <div class="box " data-aos="fade-up">
+                  <div class="img-box" data-aos="fade-up">
+                    <img src="{% static 'images/Anmol.jpeg' %}" class="img1" alt="">
+                  </div>
+                  <div class="detail-box" data-aos="fade-up">
+                    <h5>
+                      Anmol Sehgal
+                    </h5>
+                   
+                    <div class="social-icons">
+                      <a href=""><i class="fab fa-instagram"></i></a>
+                      <a href=""><i class="fab fa-twitter"></i></a>
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+              <div class="col-lg-3 col-sm-6">
+                <div class="box " data-aos="fade-up">
+                  <div class="img-box" data-aos="fade-up">
+                    <img src="{% static 'images/Ayush.jpeg' %}" class="img1" alt="">
+                  </div>
+                  <div class="detail-box" data-aos="fade-up">
+                    <h5>
+                      Ayush
+                    </h5>
+                    
+                    <div class="social-icons">
+                      <a href=""><i class="fab fa-instagram"></i></a>
+                      <a href=""><i class="fab fa-twitter"></i></a>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="client_section layout_padding" data-aos="fade-up">
+        <div class="container">
+          <div class="heading_container heading_center psudo_white_primary mb_45" data-aos="fade-up">
+            <h2>
+              What says our <span>Customers</span>
+            </h2>
+          </div>
+          <div class="carousel-wrap " data-aos="fade-up">
+            <div class="owl-carousel client_owl-carousel">
+              <div class="item">
+                <div class="box">
+                  <div class="img-box" data-aos="fade-up">
+                    <img src="{% static 'images/client1.jpg' %}" alt="" class="box-img">
+                  </div>
+                  <div class="detail-box" >
+                    <div class="client_id">
+                      <div class="client_info" data-aos="fade-up">
+                        <h6>
+                          John D. -
+                        </h6>
+                        <p>
+                          Warehouse Manager
+                        </p>
+                      </div>
+                      <i class="fa fa-quote-left" aria-hidden="true"></i>
+                    </div>
+                    <p data-aos="fade-up">
+                      "This inventory system has truly streamlined our operations. The real-time stock tracking and role-based access make it easier to manage our team efficiently. The user interface is modern and easy to use!"
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="box">
+                  <div class="img-box" data-aos="fade-up">
+                    <img src="{% static 'images/client2.jpg' %}" alt="" class="box-img">
+                  </div>
+                  <div class="detail-box">
+                    <div class="client_id">
+                      <div class="client_info" data-aos="fade-up">
+                        <h6>
+                          Samantha P. - 
+                        </h6>
+                        <p>
+                          Operations Lead
+                        </p>
+                      </div>
+                      <i class="fa fa-quote-left" aria-hidden="true"></i>
+                    </div>
+                    <p data-aos="fade-up">
+                      "I've been using this system for a few weeks now, and it's made keeping track of our stock levels so much simpler. The ability to view suppliers and orders in one place has saved us so much time. Highly recommended!"
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="box">
+                  <div class="img-box" data-aos="fade-up">
+                    <img src="{% static 'images/team-1.jpg' %}" alt="" class="box-img" style="width: 100px;">
+                  </div>
+                  <div class="detail-box">
+                    <div class="client_id">
+                      <div class="client_info" data-aos="fade-up">
+                        <h6>
+                          Marcus L. -
+                        </h6>
+                        <p>
+                          Purchasing Agent
+                        </p>
+                      </div>
+                      <i class="fa fa-quote-left" aria-hidden="true"></i>
+                    </div>
+                    <p data-aos="fade-up">
+                      "The system is quite intuitive, but I would love to see automated purchase order alerts for low stock. Other than that, it’s been great for managing inventory!"
+                     </p>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="box">
+                  <div class="img-box" data-aos="fade-up">
+                    <img src="{% static 'images/team-2.jpg' %}" alt="" class="box-img" style="width: 90px;">
+                  </div>
+                  <div class="detail-box">
+                    <div class="client_id">
+                      <div class="client_info" data-aos="fade-up">
+                        <h6>
+                          Emily T. - 
+                        </h6>
+                        <p>
+                          Logistics Coordinator
+                        </p>
+                      </div>
+                      <i class="fa fa-quote-left" aria-hidden="true"></i>
+                    </div>
+                    <p data-aos="fade-up">
+                      "Fantastic platform for managing inventory. The design is sleek and user-friendly, and the role-based access makes managing our staff much easier. Keep up the great work!" </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+      
+    
+      <section class="info_section layout_padding2" data-aos="fade-up">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-lg-3 info_col">
+              <div class="info_contact">
+                <h4>
+                  Features
+                </h4>
+                <div class="contact_link_box">
+                  
+                    
+                    <span>
+                     Inventory Management
+                    </span>
+                  
+                  
+                   <br> 
+                    <span>
+                      Warehouse Management
+                    </span>
+                  
+                  
+                    <br>
+                    <span>
+                      Manage Products/Stock
+                    </span>
+                  
+                  <br>
+                    <span>
+                      
+                      Location Management
+                    </span>
+                 
+                <br>
+                    <span>
+                      
+                      Tranfer Management
+                    </span>
+                 
+                 <br>
+                    <span>
+                      
+                      Inventory Reports
+                    </span>
+                 
+                  <br>
+                    <span>
+                      
+                      Profile Management
+                    </span>
+                 
+                  
+                </div>
+              </div>
+              
+            </div>
+            <div class="col-md-6 col-lg-3 info_col">
+              <div class="info_detail">
+                
+                      <div class="info_contact">
+                        <h4>
+                          General Learning
+                        </h4>
+                        <div class="contact_link_box">
+                          <a href="{% url 'explain' %}#IM">
+                            
+                            <span>
+                              What is Inventory Management?
+                            </span>
+                          </a>
+                          <a href="{% url 'explain' %}#OM">
+                            
+                            <span>
+                              What is Order Management?
+                            </span>
+                          </a>
+                          <a href="{% url 'explain' %}#WM">
+                            
+                            <span>
+                              What is Warehouse Management?
+                            </span>
+                          </a>
+                          <a href="{% url 'explain' %}#ID">
+                            <span>
+                              
+                              Inventory Dictionary
+                            </span>
+                          </a>
+                          <a href="{% url 'explain' %}#IMT">
+                            <span>
+                              
+                              Inventory Management Techniques
+                            </span>
+                          </a>
+                          <a href="{% url 'explain' %}#IMBP">
+                            <span>
+                              
+                              Inventory Management Best Practices
+                            </span>
+                          </a>
+                         
+                        </div>
+                      </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-2 mx-auto info_col">
+              <div class="info_link_box">
+                <h4>
+                  Links
+                </h4>
+                <div class="info_links">
+                  <a class="active" href="">
+                    Home
+                  </a>
+                  <a class="" href="#aboutus">
+                    About Us
+                  </a>
+                  <a class="" href="#whyus">
+                    Why Us
+                  </a>
+                  <a class="" href="#team">
+                    Team
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 info_col ">
+              <h4>
+                Connect with Us
+              </h4>
+              <div class="social-iconss">
+                <a href="https://www.facebook.com" target="_blank" class="social-link">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.twitter.com" target="_blank" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+      <script>
+        AOS.init({
+          duration: 1200, 
+          easing: 'ease', 
+        });
+      </script>
+      
+      <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    
+      <script type="text/javascript" src="js/bootstrap.js"></script>
+    
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+      </script>
+      
+      <script type="text/javascript" src="js/custom.js"></script>
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+    
+  
+
+</body>
+{% endblock %}

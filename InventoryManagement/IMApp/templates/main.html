@@ -1,0 +1,394 @@
+{% extends 'base.html' %}
+
+{% block title_block %} Dashboard {% endblock %}
+
+{% block main_block %}
+
+
+
+
+<style>
+
+
+
+.card {
+    border-radius: 12px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+
+.animated-number {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+
+@media (max-width: 768px) {
+    .row .col-md-3, .row .col-md-6 {
+        margin-bottom: 15px;
+    }
+
+    
+}
+
+#lowStockToast {
+ 
+    top: 600px !important;  
+    right: 20px !important;   
+    z-index: 9999 !important; 
+    width: 300px;  
+    max-height: 200px; 
+    background-color:khaki; 
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#outOfStockToast{
+    top: 400px !important;  
+    right: -10px !important;   
+    z-index: 9999 !important; 
+    width: 300px;  
+    max-height: 200px; 
+    background-color: red; 
+    padding: 15px;
+    border-radius: 10px;
+}
+
+    .navbar{
+        margin-bottom: -70px;
+    }
+
+
+   
+    .navbar-nav .navs-item .nav-link {
+        font-size: 1.1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+   
+    .navbar-nav .navs-item .nav-link:hover {
+        color: #ffcc00; 
+        background-color: rgba(255, 255, 255, 0.1); 
+        border-radius: 4px; 
+        transform: scale(1); 
+    }
+
+    .product-list div:hover {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    border-radius: 6px;
+    padding: 4px;
+    transition: background-color 0.2s ease;
+}
+
+  
+    .navbar-nav .navs-item.active .nav-link {
+        color: #ffcc00;
+        border-bottom: 3px solid #ffcc00; 
+    }
+
+
+
+
+</style>
+
+<script>
+
+function animateNumber(element, start, end, duration) {
+    let range = end - start;
+    let current = start;
+    let increment = range / (duration / 10);
+    let timer = setInterval(() => {
+        current += increment;
+        if (current >= end) {
+            current = end;
+            clearInterval(timer);
+        }
+        element.innerText = Math.floor(current);
+    }, 10);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".animated-number").forEach((el) => {
+        let targetValue = parseInt(el.getAttribute("data-value"));
+        animateNumber(el, 0, targetValue, 1000);
+    });
+});
+</script>
+
+<!-- Top Navbar -->
+<nav class="navbars navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="navs-item">
+                    <a href="{% url 'product' %}" class="nav-link text-white"><i class="fas fa-box"></i>Inventory</a>
+                </li>
+
+              
+                <li class="navs-item">
+                    
+                    <a href="{% url 'transferproduct' %}" class="nav-link text-white"><i class="fas fa-exchange-alt"></i> Transfer</a>
+                </li>
+                <li class="navs-item">
+                    <a href="{% url 'warehouse' %}" class="nav-link text-white"><i class="fas fa-warehouse"></i> Warehouse</a>
+                </li>
+                
+                {% if not request.user.is_superuser %}
+        <li class="navs-item">
+        <a href="{% url 'user_warehouse' %}" class="nav-link text-white">
+           Warehouse Products 
+        </a>
+    </li>
+{% endif %}
+                <li class="navs-item">
+                    <a href="{% url 'profile' %}" class="nav-link text-white"><i class="fas fa-user"></i> Profile</a>
+                </li>
+
+                <li class="navs-item">
+                    {% if not request.user.is_superuser %}
+                    <a href="{% url 'submit_and_list_reviews' %}" class="nav-link text-white">Review</a>
+                    {% endif %}
+
+                </li>
+                
+                <li class="navs-item">
+                    {% if request.user.is_superuser %}
+                    <a href="{% url 'approvetransfers' %}" class="nav-link text-white"><i class="fas fa-user"></i>Approve Transfers</a>
+                    {% endif %}
+                </li>
+                <li class="navs-item">
+                    {% if request.user.is_superuser %}
+                    <a href="{% url 'user_list' %}" class="nav-link text-white"><i class="fas fa-users"></i>Manage Users</a>
+                    
+                    {% endif %}
+                </li>
+
+                
+                
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+   
+    {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == "error" %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {% else %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {% endif %}
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+    {% endfor %}
+{% endif %}
+  
+</div>
+
+<div class="row mt-4">
+    
+    <div class="col-md-6">
+        <div class="card shadow-lg border-primary" style="border-width: 3px; border-radius: 15px;">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center" style="border-radius: 15px 15px 0 0;">
+                <h5 class="mb-0"><i class="fas fa-box me-2"></i>Total Products</h5>
+                <span class="badge bg-light text-dark px-3 py-2 fw-semibold">Inventory</span>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    
+                    <div class="col-md-4 d-flex flex-column align-items-center justify-content-center border-end">
+                        <h2 class="text-primary fw-bold mb-0">{{ total_products }}</h2>
+                        
+                    </div>
+    
+                    
+                    <div class="col-md-8 ps-4">
+                        <div class="product-list" style="max-height: 180px; overflow-y: auto;">
+                            {% for product in products %}
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-cube text-primary me-2"></i>
+                                    <span>{{ product.name }}</span>
+                                </div>
+                            {% empty %}
+                                <p class="text-muted">No products available.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    
+    <div class="col-md-6">
+        <div class="card shadow-lg border-success" style="border-width: 3px; border-radius: 15px;">
+            <div class="card-header bg-success text-white d-flex justify-content-between align-items-center" style="border-radius: 15px 15px 0 0;">
+                <h5><i class="fas fa-tags"></i> Total Categories</h5>
+                <span class="badge bg-light text-dark px-3 py-2" style="font-size: 1.1rem; font-weight: bold;">Types</span>
+            </div>
+            <div class="card-body text-center">
+                <h2 class="animated-number" data-value="{{ total_categories }}">0</h2>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-md-6">
+        <div class="card shadow-lg border-info" style="border-width: 3px; border-radius: 15px;">
+            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center" style="border-radius: 15px 15px 0 0;">
+                <h5><i class="fas fa-dollar-sign"></i> Total Price</h5>
+                <span class="badge bg-light text-dark px-3 py-2" style="font-size: 1.1rem; font-weight: bold;">Value</span>
+            </div>
+            <div class="card-body text-center">
+                <h2 class="animated-number" id="total-price" data-value="{{total_price}}"> <i class="fa fa-inr"></i> 0.00</h2>
+            </div>
+        </div>
+    </div>
+
+
+
+
+   
+
+    
+    <div class="col-md-6">
+        <div class="card shadow-lg border-warning" style="border-width: 3px; border-radius: 15px;">
+            <div class="card-header bg-warning text-white d-flex justify-content-between align-items-center" style="border-radius: 15px 15px 0 0;">
+                <h5><i class="fas fa-exclamation-triangle"></i> Low Stock Products</h5>
+                <span class="badge bg-light text-dark px-3 py-2" style="font-size: 1.1rem; font-weight: bold;">Urgent</span>
+            </div>
+            <div class="card-body">
+                {% if low_stock_products %}
+                    <ul class="list-group list-group-flush">
+                        {% for product in low_stock_products %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center" style="border-left: 3px solid #ffc107;">
+                                <span>{{ product.name }}</span>
+                                <span class="badge bg-warning text-dark rounded-pill" style="font-size: 1rem; padding: 8px 15px;">{{ product.quantity }} left</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted text-center"><i class="fas fa-check-circle"></i> No low stock products.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="col-md-6">
+        <div class="card shadow-lg border-danger" style="border-width: 3px; border-radius: 15px;">
+            <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center" style="border-radius: 15px 15px 0 0;">
+                <h5><i class="fas fa-times-circle"></i> Out of Stock Products</h5>
+                <span class="badge bg-light text-dark px-3 py-2" style="font-size: 1.1rem; font-weight: bold;">Critical</span>
+            </div>
+            <div class="card-body">
+                {% if out_of_stock_products %}
+                    <ul class="list-group list-group-flush">
+                        {% for product in out_of_stock_products %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center" style="border-left: 3px solid #dc3545;">
+                                <span>{{ product.name }}</span>
+                                <span class="badge bg-danger text-dark rounded-pill" style="font-size: 1rem; padding: 8px 15px;">Out of stock</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted text-center"><i class="fas fa-check-circle"></i> No out of stock products.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if low_stock_products %}
+<div id="lowStockToast" class="toast align-items-center text-white border-0 position-fixed top-0 end-0 m-3"
+     role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body">
+            ⚠️ Low Stock Alert! Some of products are running low.
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+{% endif %}
+
+{% if out_of_stock_products %}
+<div id="outOfStockToast" class="toast align-items-center text-white bg-danger border-0 position-fixed top-0 end-0 m-5"
+     role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body">
+            ❌ Out of Stock Alert! Some products are out of stock.
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+{% endif %}
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function animateNumber(element, start, end, duration) {
+            let range = end - start;
+            let increment = range / (duration / 16); 
+            let current = start;
+            let timer = setInterval(() => {
+                current += increment;
+                if (current >= end) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                element.innerText = `₹${current.toFixed(2)}`;
+            }, 16); 
+        }
+    
+        let totalPriceElement = document.getElementById("total-price");
+        let totalValue = parseFloat(totalPriceElement.getAttribute("data-value"));
+    
+        if (totalValue > 0) {
+            animateNumber(totalPriceElement, 0, totalValue, 2000); 
+        } else {
+            totalPriceElement.innerText = "0.00"; 
+        }
+    });
+    </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("DOM fully loaded and parsed.");
+
+        // Function to show toast
+        function showToast(toastId) {
+            var toastElement = document.getElementById(toastId);
+            if (toastElement) {
+                console.log(`Showing toast: ${toastId}`);
+                var toast = new bootstrap.Toast(toastElement, { autohide: true, delay: 5000 });
+                toast.show();
+            } else {
+                console.log(`Toast element ${toastId} not found.`);
+            }
+        }
+ 
+ setTimeout(() => showToast("lowStockToast"), 300);
+
+// Show Out of Stock Toast (Slight delay to separate them)
+setTimeout(() => showToast("outOfStockToast"), 300);
+});
+</script>
+
+
+
+    
+{% endblock %}

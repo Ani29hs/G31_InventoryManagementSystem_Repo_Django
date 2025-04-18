@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block main_block %}
+
+{% load static %}
+<header  data-aos="fade-down">
+    <h1>Inventory Management Explained</h1>
+</header>
+
+<div class="section" id="IM" data-aos="fade-up">
+    <h2>What is Inventory Management?</h2>
+    <p>Inventory management is the process of ordering, storing, tracking, and controlling inventory levels of products and materials. It ensures that the right amount of inventory is available to meet customer demand while minimizing carrying costs. Proper inventory management optimizes stock levels, prevents overstocking or stockouts, and helps businesses maintain smooth operations.</p>
+    <div class="icon-container" data-aos="fade-up">
+        <div class="icon-box">📦</div>
+        <div class="icon-box">💡</div>
+        <div class="icon-box">📊</div>
+    </div>
+    <div class="hover-box" data-aos="fade-up">
+        <p>Effective inventory management prevents overstocking and stockouts, improving efficiency.</p>
+    </div>
+</div>
+
+<div class="section" data-aos="fade-up" id="OM">
+    <h2>What is Order Management?</h2>
+    <p>Order management is the process of receiving, processing, and fulfilling customer orders. It involves managing the entire order lifecycle, from the moment the customer places an order until the products are shipped and delivered. An efficient order management system helps businesses track order statuses, reduce errors, and ensure timely deliveries.</p>
+    <div class="icon-container" data-aos="fade-up">
+        <div class="icon-box">📝</div>
+        <div class="icon-box">🚚</div>
+        <div class="icon-box">📈</div>
+    </div>
+    <div class="hover-box" data-aos="fade-up">
+        <p>Order management is the process of receiving, tracking, and fulfilling customer orders.</p>
+    </div>
+</div>
+
+<div class="section" data-aos="fade-up" id="WM">
+    <h2>What is Warehouse Management?</h2>
+    <p>Warehouse management refers to the control and management of activities in a warehouse, including the receiving, storage, and shipping of goods. It helps businesses manage their physical inventory, optimize space usage, and ensure efficient order fulfillment. A warehouse management system (WMS) is often used to automate and streamline these processes.</p>
+    <div class="icon-container" data-aos="fade-up">
+        <div class="icon-box">🏢</div>
+        <div class="icon-box">📦</div>
+        <div class="icon-box">⚙️</div>
+    </div>
+    <div class="hover-box" data-aos="fade-up">
+        <p>Warehouse management is the process of organizing, controlling, and optimizing warehouse operations, including inventory tracking, storage, order fulfillment, and logistics, to ensure efficient movement of goods.</p>
+    </div>
+</div>
+
+<div class="section" data-aos="fade-up" id="ID">
+    <h2>Inventory Dictionary</h2>
+    <p>The inventory dictionary includes terms related to inventory management that help businesses understand and manage their inventory. Some common terms include:</p>
+    <ul data-aos="fade-up">
+        <li><strong>Stock Keeping Unit (SKU):</strong> A unique identifier for each product.</li>
+        <li><strong>Lead Time:</strong> The time it takes for inventory to arrive after an order is placed.</li>
+        <li><strong>Safety Stock:</strong> Extra inventory kept on hand to avoid stockouts.</li>
+        <li><strong>Reorder Point:</strong> The inventory level at which new stock should be ordered.</li>
+    </ul>
+    <div class="icon-container" data-aos="fade-up">
+        <div class="icon-box">🏢</div>
+        <div class="icon-box">📦</div>
+        <div class="icon-box">⚙️</div>
+    </div>
+
+</div>
+
+<div class="section" data-aos="fade-up" id="IMT">
+    <h2>Inventory Management Techniques</h2>
+    <p>Inventory management techniques help businesses efficiently track, store, and replenish stock while minimizing costs and avoiding shortages or overstocking. Common techniques include Just-in-Time (JIT), which reduces storage costs by ordering stock only when needed, and ABC Analysis, which categorizes inventory based on value and priority. FIFO (First-In, First-Out) and LIFO (Last-In, First-Out) help manage inventory flow, especially for perishable or time-sensitive goods. Economic Order Quantity (EOQ) determines the optimal order quantity to minimize costs.</p>
+   
+       
+</div>
+
+<div class="section" data-aos="fade-up" id="IMBP">
+    <h2>Inventory Management Best Practices</h2>
+    <p>Some best practices for efficient inventory management include:</p>
+    <ul>
+        <li>Implementing real-time tracking systems.</li>
+        <li>Regularly reviewing stock levels and demand forecasts.</li>
+        <li>Optimizing warehouse layout to reduce handling time.</li>
+        <li>Training staff to handle inventory effectively.</li>
+    </ul>
+
+    <img src="{% static 'images/download.png' %}" alt="" data-aos="fade-up">
+</div>
+
+<script>
+   
+    AOS.init({
+      duration: 1200, 
+      easing: 'ease', 
+    });
+</script>
+
+{% endblock %}
